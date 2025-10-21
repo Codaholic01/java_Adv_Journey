@@ -1,0 +1,155 @@
+Sure! Here are detailed notes on Classes and Objects in Java:
+
+1. Introduction to Classes and Objects :
+
+Class: A class is a blueprint or template for creating objects. It defines the properties (attributes) and behaviors (methods) that the objects created from the class will have.
+Object: An object is an instance of a class. It represents a specific entity with state and behavior defined by its class.
+
+2. Structure of a Class
+ => A class in Java typically consists of:
+
+ . Fields (Attributes): Variables that hold the state of an object.
+ . Methods (Behaviors): Functions that define the behavior of the objects created from the class.
+ . Constructors: Special methods used to initialize objects.
+
+3. Defining a Class:
+
+Syntax:
+
+ public class ClassName {
+      // Fields
+      dataType fieldName;
+      // Constructor
+      public ClassName(parameters) {
+          // Initialization code
+      }
+      // Methods
+      returnType methodName(parameters) {
+          // Method body
+      }
+  }
+  
+
+Example:
+
+  public class Car {
+      // Fields
+      String color;
+      int speed;
+      // Constructor
+      public Car(String color, int speed) {
+          this.color = color;
+          this.speed = speed;
+      }
+      // Method
+      public void drive() {
+          System.out.println("The " + color + " car is driving at " + speed + " km/h.");
+      }
+  }
+  
+
+
+4. Creating Objects
+Objects are created using the new keyword followed by the class constructor.
+
+Syntax:
+
+  . ClassName objectName = new ClassName(arguments);
+
+Example:
+  public class Main {
+      public static void main(String[] args) {
+          Car myCar = new Car("Red", 100); // Creating an object of Car
+          myCar.drive(); // Calling the method
+      }
+  }
+  
+
+5. Accessing Fields and Methods
+You can access the fields and methods of an object using the dot (.) operator.
+
+Example:
+myCar.color = "Blue"; // Accessing and modifying a field
+myCar.drive(); // Calling a method
+
+6. Constructors:
+
+. A constructor is a special method that is called when an object is instantiated.
+
+. It has the same name as the class and does not have a return type.
+
+= Types of Constructors:
+
+  . Default Constructor: A constructor with no parameters.
+  . Parameterized Constructor: A constructor that takes parameters to initialize fields.
+
+Example:
+
+public class Bike {
+    String brand;
+    int gear;
+
+    // Default Constructor
+    public Bike() {
+        brand = "Default Brand";
+        gear = 1;
+    }
+
+    // Parameterized Constructor
+    public Bike(String brand, int gear) {
+        this.brand = brand;
+        this.gear = gear;
+    }
+}
+
+7. The this Keyword : 
+  . The this keyword refers to the current object instance.
+
+  . It is used to differentiate between class fields and parameters with the same name.
+
+Example:
+
+public class Person {
+    String name;
+
+    public Person(String name) {
+        this.name = name; // 'this.name' refers to the class field
+    }
+}
+
+8. Class vs. Object
+
+ Class:
+   . Blueprint for creating objects.
+   . Defines properties and behaviors.
+   . Can contain static members (fields and methods).
+
+ Object:
+  . Instance of a class.
+  . Has its own state and behavior.
+  . Created using the class constructor.
+
+
+9. Static Members:-
+  . Static Fields: Shared among all instances of a class. They belong to the class rather than any specific object.
+  . Static Methods: Can be called without creating an instance of the class.
+
+Example:
+
+public class Counter {
+    static int count = 0; // Static field
+
+    public Counter() {
+        count++; // Increment count for each object created
+    }
+
+    public static void displayCount() {
+        System.out.println("Count: " + count);
+    }
+}
+
+10. Summary
+  . Classes and objects are fundamental concepts in Java OOP.
+  . A class defines the structure and behavior of objects.
+  . Objects are instances of classes that hold specific data and can perform actions.
+  . Constructors are used to initialize objects, and the this keyword helps in referencing the current object.
