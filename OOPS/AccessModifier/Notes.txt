@@ -1,0 +1,153 @@
+🔹 What are Access Modifiers?
+  In Java, access modifiers decide who can see and use a class, method, variable, or constructor.
+  Think of them like visibility controls.
+Example in real life:
+  public park → anyone can enter.
+  private house → only you can enter.
+  protected room → only family members can enter.
+  default (no lock) → only neighbors in your colony can enter.
+
+🔹 Types of Access Modifiers in Java:
+
+There are 4 main access modifiers:
+
+Modifier	              Access Level	         Who Can Access?
+public	                  Everywhere	         Any class, any package
+private	Very              restricted	         Only inside the same class
+protected	              Family only	         Same class, subclasses (child classes), same package
+default (no keyword)	  Package-only	         Same package only (not outside)
+
+1️⃣ public
+ .  Accessible from anywhere (same class, same package, different package).
+  . Used when you want full access.
+
+  Example:
+    class A {
+        public int x = 10;
+
+        public void show() {
+            System.out.println("Public method");
+        }
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            A obj = new A();
+            System.out.println(obj.x); // ✅ Accessible
+            obj.show();                // ✅ Accessible
+        }
+    }
+
+✅ Output:
+   10
+   Public method
+
+
+
+2️⃣ private
+  . Accessible only inside the same class.
+  . Not visible to other classes, not even subclasses.
+
+ Example:
+   class A {
+       private int data = 50;
+
+       private void display() {
+           System.out.println("Private method");
+       }
+
+       void accessPrivate() {
+           System.out.println("Accessing data: " + data);
+           display(); // ✅ Allowed inside same class
+       }
+   }
+
+   public class Main {
+       public static void main(String[] args) {
+           A obj = new A();
+           // System.out.println(obj.data); // ❌ Error
+           // obj.display();                // ❌ Error
+           obj.accessPrivate(); // ✅ Allowed (indirect access)
+       }
+   }
+
+
+✅ Output:
+  Accessing data: 50
+  Private method
+
+
+3️⃣ protected
+  Accessible in:
+    . Same class ✅
+    . Same package ✅
+    . Child classes (even if in different package) ✅
+  . But not accessible directly from outside package (only via subclass).
+
+Example:
+  class Parent {
+      protected String name = "Shreekant";
+
+      protected void showName() {
+          System.out.println("Name: " + name);
+      }
+  }
+
+  class Child extends Parent {
+      void display() {
+          showName(); // ✅ Accessible in child class
+      }
+  }
+
+  public class Main {
+      public static void main(String[] args) {
+          Child c = new Child();
+          c.display(); // ✅ Works
+      }
+  }
+
+✅ Output:
+  Name: Shreekant
+
+
+4️⃣ default (no keyword)
+   . If you don’t write any modifier → it is default.
+   . Accessible only within the same package.
+   . Not accessible from other packages.
+
+Example:
+  class A {
+      int data = 100; // default (no keyword)
+
+      void show() {
+          System.out.println("Default access");
+      }
+  }
+
+  public class Main {
+      public static void main(String[] args) {
+          A obj = new A();
+          System.out.println(obj.data); // ✅ Accessible (same package)
+          obj.show();                   // ✅ Accessible
+      }
+  }
+
+✅ Output:
+  100
+  Default access
+
+
+🔹 Quick Revision (Cheat Sheet):
+
+Modifier	SameClass	SamePackage	 Subclass (other package)	 World (anywhere)
+public	       ✅	       ✅	         ✅	                         ✅
+protected	   ✅	       ✅	         ✅	                         ❌
+default  	   ✅	       ✅	         ❌	                         ❌
+private	       ✅	       ❌	         ❌	                         ❌
+
+
+🔹 Where do we use them?
+ 1. public → For common utility methods (main(), API methods).
+ 2. private → For sensitive data (like passwords, bank balance).
+ 3. protected → For methods that child classes should override.
+ 4. default → For package-level helpers (used only inside same package).

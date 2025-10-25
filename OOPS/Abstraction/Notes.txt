@@ -1,0 +1,109 @@
+🎭 What is Abstraction?
+   Abstraction means hiding the implementation details and showing only the essential features to the user.
+👉 In simple words:
+  . Encapsulation = Hides data.
+  . Abstraction = Hides implementation.
+
+📦 Real-Life Example of Abstraction
+  Think about a car:
+   . You just press the accelerator to increase speed.
+   . You don’t need to know how the engine works internally.
+The car’s company hides the complex mechanism and gives you only the necessary interface to use.
+That’s abstraction.
+
+🖥️ Example using Abstract Class
+  // Abstract class (cannot be directly instantiated)
+  abstract class Vehicle {
+      // abstract method (no body, only definition)
+      abstract void start();
+
+      // normal method
+      void fuelType() {
+          System.out.println("This vehicle uses fuel.");
+      }
+  }
+
+  // Concrete class implementing abstract method
+  class Car extends Vehicle {
+      @Override
+      void start() {
+          System.out.println("Car starts with a key or button.");
+      }
+  }
+
+  class Bike extends Vehicle {
+      @Override
+      void start() {
+          System.out.println("Bike starts with a kick or button.");
+      }
+  }
+
+  public class Main {
+      public static void main(String[] args) {
+          Vehicle v1 = new Car();
+          Vehicle v2 = new Bike();
+
+          v1.start();      // Car starts with a key or button.
+          v2.start();      // Bike starts with a kick or button.
+      }
+  }
+
+
+🖥️ Example using Interface
+   interface Animal {
+       void sound();  // abstract method
+   }
+
+   class Dog implements Animal {
+       public void sound() {
+           System.out.println("Dog barks");
+       }
+   }
+
+   class Cat implements Animal {
+       public void sound() {
+           System.out.println("Cat meows");
+       }
+   }
+
+   public class Main {
+       public static void main(String[] args) {
+           Animal a1 = new Dog();
+           Animal a2 = new Cat();
+
+           a1.sound();   // Dog barks
+           a2.sound();   // Cat meows
+       }
+   }
+
+
+✅ Key Points about Abstraction
+ 1.  Hides implementation → You don’t need to know how, only what.
+ 2. Achieved by:
+    . Abstract classes (0–100% abstraction).
+    . Interfaces (100% abstraction in Java 7, default+static methods added in Java 8+).
+ 3. Improves security → Exposes only necessary functionality.
+ 4. Increases flexibility → Implementation can change without affecting the
+
+⚡In short:
+  . Encapsulation = Hides data (via private + getters/setters).
+  . Abstraction = Hides implementation (via abstract classes & interfaces).
+
+
+🔑 Abstraction vs Encapsulation in Java
+
+Feature	         Abstraction	                                                                  Encapsulation
+
+. Definition:	     Hiding implementation details and showing only essential features.	              Hiding data (variables) and providing controlled access.
+
+. Focus:	         Focuses on what an object does.	                                              Focuses on how the data of the object is hidden.
+
+. Achieved by:	 Abstract classes and Interfaces.	                                              Using access modifiers (private, public) and getters/setters.
+
+. Level:	          Design Level (blueprint of a system).	                                           Implementation Level (actual data protection).
+
+. Access	          Provides an interface to use the functionality without knowing details.	       Provides controlled access to data through methods.
+
+. ExampleInReallife:	Driving a car: You press accelerator without knowing engine working.	      Medicine capsule: Medicine is hidden inside, you can only consume via capsule.
+
+. Main Purpose:	Hides implementation (behavior).	                                               Hides internal data (state).

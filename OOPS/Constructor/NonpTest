@@ -1,8 +1,0 @@
-
-public class Main {
-    public static void main(String[] args) {
-        // Create object
-        Car myCar = new Car();  // default constructor is called
-        myCar.displayInfo();
-    }
-}

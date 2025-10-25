@@ -1,0 +1,520 @@
+Polymorphism Overview
+
+👉Polymorphism comes from Greek words:
+   Poly = many
+   Morphism = forms
+👉So in Java, polymorphism means one thing behaving in many forms.
+
+ 👉 Example: + operator behaves differently for numbers and strings (2 + 3 vs "Hi" + "Bye").
+    Polymorphism makes programs flexible and reusable.
+
+ 👉There are two types of polymorphism in Java:
+     Compile-Time Polymorphism (Static) → happens during compilation
+     Runtime Polymorphism (Dynamic) → happens during execution
+
+1️⃣ Compile-Time Polymorphism (Method Overloading):
+Definition:
+👉Polymorphism which is resolved at compile time is called compile-time polymorphism.
+  The most common example is method overloading.
+
+👉Method Overloading:
+    Multiple methods with same name but different parameters (type or number).
+    The compiler decides which method to call at compile time.
+
+📌 Example: Method Overloading
+class Student {
+   String name;
+   int age;
+
+   public void displayInfo(String name) {       // (1)
+       System.out.println(name);               // (2)
+   }
+
+   public void displayInfo(int age) {          // (3)
+       System.out.println(age);                // (4)
+   }
+
+   public void displayInfo(String name, int age) { // (5)
+       System.out.println(name);                    // (6)
+       System.out.println(age);                     // (7)
+   }
+}
+
+Line-by-Line Explanation
+👉 public void displayInfo(String name) → A method that accepts a string.
+👉System.out.println(name); → Prints the string passed.
+👉public void displayInfo(int age) → Another method with the same name but different parameter type (int).
+👉System.out.println(age); → Prints the integer passed.
+👉public void displayInfo(String name, int age) → Another method with same name, but different number of parameters.
+👉System.out.println(name); → Prints the string.
+👉System.out.println(age); → Prints the integer.
+
+✅ Key point:
+     All three methods have same name, but the compiler knows which one to call depending on the parameters you provide.
+
+2️⃣ Runtime Polymorphism (Method Overriding):
+Definition:
+👉Polymorphism which is resolved at runtime is called runtime polymorphism.
+   The most common example is method overriding.
+
+👉Method Overriding:
+    When a child class has the same method as a parent class but with a different implementation.
+    The method that gets executed depends on the object type at runtime.
+
+📌 Example: Runtime Polymorphism
+1  class Shape {
+2      public void area() {
+3          System.out.println("Displays Area of Shape");
+4      }
+5  }
+
+6  class Triangle extends Shape {
+7      @Override
+8      public void area() {
+9          System.out.println("Area of Triangle formula: 0.5 * base * height");
+10     }
+11 }
+
+12 class Circle extends Shape {
+13     @Override
+14     public void area() {
+15         System.out.println("Area of Circle formula: 3.14 * r * r");
+16     }
+17 }
+
+18 public class Main {
+19     public static void main(String[] args) {
+20         Shape s;                 // declare a reference of type Shape
+21
+22         s = new Triangle();      // create a Triangle object, assign to Shape reference (upcasting)
+23         s.area();                // calls Triangle's area() because the actual object is Triangle
+24
+25         s = new Circle();        // now create a Circle object, assign to same Shape reference
+26         s.area();                // calls Circle's area() because the actual object is Circle
+27     }
+28 }
+
+. Explanations
+
+1. class Shape { — Defines a new class named Shape. This will be the parent (super) class..
+
+2. public void area() { — Declares a public method named area with no parameters and no return value (void).
+
+3. System.out.println("Displays Area of Shape"); — If area() of Shape is called, this message will print. It’s the default behavior.
+
+4. } — Ends the area() method.
+
+5. } — Ends the Shape class.
+
+6. class Triangle extends Shape { — Declares Triangle as a child class of Shape. It inherits from Shape.
+
+7. @Override — Optional annotation that tells the compiler: “I intend to override a method from the parent.” If the method signature doesn’t match the parent, the compiler will give an error — very useful to catch mistakes.
+
+8. public void area() { — This has the same method signature as Shape.area() → this overrides the parent method.
+
+9. System.out.println("Area of Triangle formula: 0.5 * base * height"); — Triangle’s specific implementation (what runs when a Triangle object’s area() is called).
+
+10. } — Ends Triangle’s area() method.
+
+11. } — Ends the Triangle class.
+
+12. class Circle extends Shape { — Declares Circle as another child class of Shape.
+
+13. @Override — Same check that this method overrides a parent method.
+
+14. public void area() { — Overrides Shape.area() in Circle.
+
+15. System.out.println("Area of Circle formula: 3.14 * r * r"); — Circle’s specific implementation.
+
+16. } — Ends Circle’s area() method.
+
+17. } — Ends the Circle class.
+
+18. public class Main { — Declares the Main class (contains the program entry point).
+
+19. public static void main(String[] args) { — JVM starts execution here. static so JVM can call it without an object; String[] args holds command-line arguments.
+
+20. Shape s; — Declares a variable s whose compile-time type is Shape. Right now it doesn’t reference any object.
+
+21. (blank line for readability)
+
+22. s = new Triangle(); — Creates a Triangle object and assigns it to s. This is upcasting: a Triangle is-a Shape, so a Shape reference can point to it.
+
+23 s.area(); — Although s’s compile-time type is Shape, the actual object at runtime is Triangle, so Java calls Triangle’s area() — this is dynamic method dispatch (runtime polymorphism).
+
+24. (blank line)
+
+25. s = new Circle(); — Now s points to a Circle object (still upcasting).
+
+26. s.area(); — At runtime Java sees the actual object is Circle, so it calls Circle’s area().
+
+27. } — Ends main.
+
+28. } — Ends Main class.
+
+
+✅ Key Points for Runtime Polymorphism
+👉Overriding is done in child class.
+👉The method that runs depends on object type at runtime.
+👉Parent reference can refer to child object:
+      Shape s = new Triangle();
+      s.area();  // calls Triangle's area() if overridden
+👉Helps in flexible and reusable code, especially with collections of objects (Shape[] shapes = {new Circle(), new Triangle()}).
+
+⚠ Important Notes:
+👉Compile-time polymorphism: method overloading, resolved by compiler.
+👉Runtime polymorphism: method overriding, resolved by JVM at runtime.
+👉Polymorphism increases code readability and maintainability.
+
+
+💡 Quick memory tips:
+👉Compile-Time = Overloading = Same class, multiple forms
+👉Runtime = Overriding = Different classes, same method
+👉“Static” → compile knows it; “Dynamic” → JVM decides at runtime
+👉Polymorphism = one interface, many forms → makes code flexible, reusable, and e
+
+
+
+
+1. Rules of Method Overloading (Compile-Time Polymorphism)
+  . Must change number of parameters OR type of parameters.
+  . Cannot overload only by changing return type.
+  . Happens in the same class.
+
+👉 Example:
+   ✅ Example 1: Different number of parameters
+      class Calculator {
+          // Method 1: add two numbers
+          int add(int a, int b) {
+              return a + b;
+          }
+
+          // Method 2: add three numbers
+          int add(int a, int b, int c) {
+              return a + b + c;
+          }
+      }
+
+      public class Main {
+          public static void main(String[] args) {
+              Calculator c = new Calculator();
+
+              System.out.println(c.add(10, 20));       // calls 2-parameter version
+              System.out.println(c.add(10, 20, 30));   // calls 3-parameter version
+          }
+      }
+
+
+👉 Here, same method name add() is used.
+  . c.add(10,20) → matches 2 parameters → runs method with 2 arguments.
+  . c.add(10,20,30) → matches 3 parameters → runs method with 3 arguments.
+
+
+✅ Example 2: Different type of parameters
+
+   class Printer {
+       void print(String text) {
+           System.out.println("Printing text: " + text);
+       }
+
+       void print(int number) {
+           System.out.println("Printing number: " + number);
+       }
+   }
+
+   public class Main {
+       public static void main(String[] args) {
+           Printer p = new Printer();
+
+           p.print("Hello Java");   // calls String version
+           p.print(100);            // calls int version
+       }
+   }
+
+
+
+👉 Both methods are named print(),
+   . but one accepts a String,
+   . the other accepts an int.
+  The compiler decides which to call based on the argument type.
+
+❌ Not Allowed: Only changing return type
+   class Demo {
+       int show(int a) {
+           return a;
+       }
+
+       // ❌ Error: same method name, same parameters, only return type is different
+       double show(int a) {
+           return a;
+       }
+   }
+
+👉 This won’t compile because the compiler gets confused:
+If you call show(5), should it return int or double?
+That’s why Java does not allow overloading by only changing return type.
+
+
+💡 Easy Memory Tip
+  . Same class, same method name.
+  . Change inputs (number or type).
+  . Return type alone → ❌ not valid.
+
+
+
+2. Rules of Method Overriding (Runtime Polymorphism)
+   . Must have same method name, same parameters, same return type (or covariant return type).
+   . Must be in different classes (parent-child relationship).
+   . Access modifier in child cannot be more restrictive.
+      (e.g., if parent has public, child cannot make it private).
+   . Only inherited methods can be overridden (not static, final, or private).
+
+ i. Same method name, parameters, and return type
+
+  👉 The child must copy the exact method signature of the parent.
+  If you change the name, parameters, or return type → it’s not overriding.
+
+  ✅ Example:
+      class Parent {
+          public void show() {
+              System.out.println("Parent class show()");
+          }
+      }
+
+      class Child extends Parent {
+          @Override
+          public void show() {
+              System.out.println("Child class show()");
+          }
+      }
+
+      public class Main {
+          public static void main(String[] args) {
+              Parent obj = new Child();
+              obj.show();   // ✅ Calls Child’s version (runtime polymorphism)
+          }
+      }
+
+🔑 Output:
+    Child class show()
+
+ ✅ Explain:
+    👉 (1) class Parent { → We define a Parent class.
+    👉 (2) public void show() → Inside Parent, we have a method show().
+    👉 (3) System.out.println("Parent class show()"); → If this method is called, it prints "Parent class show()".
+    👉 (4) class Child extends Parent → Child is a subclass (inherited from Parent).
+    👉 (5) @Override → This tells Java we are overriding the same method from the Parent.
+    👉 (6) public void show() → The method signature is exactly the same as Parent’s.
+    👉 (7) System.out.println("Child class show()"); → Child’s version prints "Child class show()".
+    👉 (8) public class Main → Main class where the program starts.
+    👉 (9) public static void main(String[] args) → Entry point of Java program.
+    👉 (10) Parent obj = new Child();
+
+    . Here we use upcasting (Parent reference, Child object).
+
+    . Even though the reference type is Parent, the actual object is Child.
+    👉 (11) obj.show();
+    . At runtime, Java checks the object type (Child).
+    . So it runs Child’s show(), not Parent’s.
+    . Output → "Child class show()".
+✅ Key Point:
+This is runtime polymorphism (method overriding) because the decision of which show() to call is made at runtime depending on the object (new Child()), not the reference type (Parent).
+
+ii. Must be in Parent-Child relationship
+    👉 Overriding always needs inheritance.
+    If there’s no parent-child, it’s just another method, not overriding.
+
+iii. Access modifier in child cannot be weaker
+   👉 If parent has public, child cannot make it protected or private.
+
+❌ Wrong Example:
+     class Parent {
+         public void display() {}
+     }
+
+     class Child extends Parent {
+         @Override
+         protected void display() {} // ❌ Error: weaker access
+     }
+
+Line 1: class Parent {
+     . Declares the Parent class.
+
+Line 2: public void display() {}
+     . display() is declared public in the parent — meaning any code anywhere (any package) can call it.
+
+Line 3: }
+      . Ends Parent.
+
+Line 4: class Child extends Parent {
+      . Child inherits from Parent and therefore inherits the display() method.
+
+Line 5: @Override
+     . Tells the compiler “I intend to override an inherited method.” The compiler will check signature and visibility rules.
+
+Line 6: protected void display() {} — the problem
+     . Here the child tries to override display() but changes the access from public → protected (which is less visible).
+     . Java does not allow reducing visibility when overriding. The compiler will give an error like:
+
+    display() in Child cannot override display() in Parent
+    attempting to assign weaker access privileges; was public
+
+
+✅ Why this is not allowed (simple reason):
+   . If Parent.display() is public, any code that has a Parent reference can call display()
+    from anywhere. If a Child instance replaced that Parent reference and Child made display()
+    protected, some code that was allowed to call display() on a Parent would suddenly be
+    blocked — that would break the expectation that a Child is a Parent. Java prevents this
+    by requiring the overridden method to be at least as accessible as the parent’s.
+
+Short example showing the problem if it were allowed:
+
+✅ Correct Example:
+    class Parent {
+        protected void display() {}
+    }
+
+    class Child extends Parent {
+        @Override
+        public void display() {}  // ✅ Allowed: stronger access
+    }
+
+👉Parent p = new Child();
+    p.display(); // caller expects this to work anywhere because Parent.display() is public
+   // but if Child.display() were protected, this call might become illegal — that's why Java forbids it
+
+Make child method public (same visibility):
+    class Child extends Parent {
+        @Override
+        public void display() {  // OK — same visibility
+            System.out.println("Child display");
+        }
+    }
+
+-> Or make parent less visible and child equal/stronger (allowed):
+  class Parent {
+      protected void display() {}   // parent is protected
+  }
+
+  class Child extends Parent {
+      @Override
+      public void display() {}      // OK — child increased visibility to public
+  }
+
+
+iv. Only inherited methods can be overridden
+  👉 Some methods cannot be overridden:
+     . static methods → they are class-level, not object-level.
+     . final methods → cannot be changed.
+     . private methods → not visible to child class
+
+
+✅ Example (Static Method Hiding):
+     class Parent {
+         static void greet() {
+             System.out.println("Hello from Parent");
+         }
+     }
+
+     class Child extends Parent {
+         static void greet() {   // not overriding, just hiding
+             System.out.println("Hello from Child");
+         }
+     }
+
+     public class Main {
+         public static void main(String[] args) {
+             Parent.greet();  // calls Parent version
+             Child.greet();   // calls Child version
+         }
+     }
+
+:#:Line-by-line explanation
+ 👉class Parent {
+   . Declares the Parent class.
+
+ 👉static void greet() {
+   . Declares a static method greet in Parent.
+   . static means the method belongs to the class Parent, not to any instance/object.
+
+ 👉System.out.println("Hello from Parent");
+   . The method prints "Hello from Parent" when called.
+
+ 👉class Child extends Parent {
+   . Declares Child as a subclass of Parent.
+
+ 👉static void greet() { (inside Child)
+   . Child declares its own static method with the same signature.
+   . This does not override the parent method — it hides it. Hiding = two separate class-level methods with same name.
+
+ 👉System.out.println("Hello from Child");
+   . Prints "Hello from Child" when Child.greet() is called.
+
+ 👉public class Main { / public static void main
+   . Program entry point.
+
+ 👉Parent.greet();
+   . Calls the greet method on the Parent class. Outputs:
+      Hello from Parent
+
+ 👉Child.greet();
+   . Calls the greet method on the Child class. Outputs:
+         Hello from Child
+
+:*:Extra demonstration (why hiding ≠ overriding)
+  👉If you do this:
+    Parent p = new Child();
+    p.greet();   // allowed, but which one runs?
+
+  👉Output: Hello from Parent
+     . Reason: the call is resolved at compile time using the reference type (Parent), not the actual object type.
+       Static methods are class-bound, not instance-bound.
+
+ If instead:
+   Child c = new Child();
+   c.greet();   // outputs Hello from Child
+   . Because the compile-time type is Child, the Child version is chosen.
+
+ Key takeaways (short)
+   . Static methods belong to the class, not to instances.
+   . When subclass defines a static method with the same signature, it hides the parent method — this is not polymorphic overriding.
+   . Which method runs is decided at compile time based on the reference/class you use (e.g., Parent.greet() vs Child.greet() or reference type), so Parent p = new Child(); p.greet() calls the Parent version.
+
+Want me to show a tiny runnable example that prints all three cases (class calls and instance-call with Parent p = new Child()), so you can run and see outputs directly?
+
+
+
+v. Covariant Return Type (Advanced Rule)
+  👉 Overriding allows a child class method to return a subclass type of the parent’s return type.
+ ✅ Example:. Covariant Return Type (Advanced Rule)
+       class Animal {}
+
+       class Dog extends Animal {}
+
+       class Parent {
+           Animal getAnimal() {
+               return new Animal();
+           }
+       }
+
+       class Child extends Parent {
+           @Override
+           Dog getAnimal() {   // ✅ Allowed: Dog is a subclass of Animal
+               return new Dog();
+           }
+       }
+
+
+💡 Easy Memory Tip
+   . Overloading → same class, different inputs.
+   . Overriding → child gives its own version of parent’s method.
+   . Access modifier: child = same or stronger, never weaker.
+   . Static/final/private → ❌ no overriding.
+   . Covariant return → ✅ allowed.
+
+👉 So in short:
+   . Overriding = child class “replaces” parent’s method with its own behavior, but must follow strict rules.
+
+
+
+

@@ -1,0 +1,65 @@
+🔒 What is Encapsulation?
+    Encapsulation means hiding the internal details of a class and allowing access only through controlled methods.
+👉 In simple words:
+ . Hide data (variables) inside a class.
+ . Provide methods (getters/setters) to access or update the data.
+ . This way, the internal data of the object is protected and can’t be changed directly from outside.
+
+📦 Real-Life Example
+  Think about a capsule (medicine):
+   . It hides the medicine inside.
+   . You only consume the capsule, not the raw medicine directly.
+Similarly, in Java, encapsulation hides the variables and exposes only the necessary functionality.
+
+class Student {
+    // Step 1: Make variables private (hidden from outside)
+    private String name;
+    private int age;
+
+    // Step 2: Provide public methods (getter and setter) to access them
+    public String getName() {
+        return name;   // only returns value
+    }
+
+    public void setName(String name) {
+        this.name = name;   // allows controlled modification
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        // Adding control: age should not be negative
+        if(age > 0) {
+            this.age = age;
+        } else {
+            System.out.println("Invalid Age!");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+
+        // setting values using setter
+        s1.setName("Shreekant");
+        s1.setAge(21);
+
+        // getting values using getter
+        System.out.println("Name: " + s1.getName());
+        System.out.println("Age: " + s1.getAge());
+    }
+}
+
+
+✅ Key Points about Encapsulation
+ 1. Data hiding → Variables are kept private.
+ 2. Controlled access → Access given through public getters/setters.
+ 3. Security → Prevents invalid data (like negative age).
+ 4. Flexibility → You can change code internally without affecting outside code.
+
+
+⚡In short:
+Encapsulation = Wrapping data + methods together while keeping the data safe.

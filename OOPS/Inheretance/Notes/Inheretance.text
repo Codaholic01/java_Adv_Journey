@@ -1,0 +1,110 @@
+🔹 1. What is Inheritance? (Simple Idea)
+👉Inheritance means “reusing what’s already built”.
+👉Imagine you’re designing a game:
+    $ Every character (Player, Enemy, NPC) has a name and health.
+    $ Instead of rewriting name and health in every class, you create once in a Character class and reuse it.
+
+👉So:
+   # Parent / Base / Superclass → the original blueprint
+   # Child / Derived / Subclass → copies + adds new things
+
+🔹 2. Why Use It?
+ 👉 Reusability → write once, use many times
+ 👉 Cleaner Code → avoids duplication
+ 👉 Extensibility → add new features without rewriting
+
+🔹 3. Real-Life Analogy
+Think of a family:
+ 👉 Parent teaches language, manners.
+ 👉 Child automatically inherits those skills but can learn extra (like coding).
+ 👉 So the child has everything the parent had + its own features.
+
+🔹 4. Types of Inheritance in Java
+
+🔹 1. Single Inheritance — simple, step-by-step
+       👉  Short definition: Single inheritance = one class (child) inherits from one other class (parent). The child gets the parent's properties and methods automatically — so you reuse code.
+
+      1) Real-life analogy (simple)
+        👉 Think: Parent class = Vehicle, Child class = Car.
+        👉 A car is a vehicle, so it naturally has things a vehicle has (like start()), and adds its own (like playMusic()).
+
+      2) Quick diagram (ASCII)
+         Parent (Vehicle)
+               ↑
+         Child  (Car)
+          👉 Arrow points from child → parent (child extends parent).
+
+      3) Java example you can run (very small):
+
+      class Vehicle {
+          void start() {
+              System.out.println("Vehicle starts");
+          }
+      }
+
+      class Car extends Vehicle {   // <-- extends means "inherit from"
+          void playMusic() {
+              System.out.println("Car plays music");
+          }
+      }
+
+      public class Main {
+          public static void main(String[] args) {
+              Car myCar = new Car();   // create child object
+              myCar.start();           // inherited from Vehicle
+              myCar.playMusic();       // Car's own method
+          }
+      }
+    👉 Output
+         Vehicle starts
+         Car plays music
+
+
+👉Step-by-step explanation (line-by-line)
+
+ 🔹class Vehicle { ... }
+ 👉 This is the parent (base) class. It has a method start().
+
+ 🔹class Car extends Vehicle { ... }
+  👉 extends Vehicle means Car inherits everything from Vehicle (all non-private members). Car is a child (derived) class.
+
+ 🔹void playMusic() inside Car
+  👉 This is new functionality added only to Car.
+
+ 🔹Car myCar = new Car();
+  👉 We create an object of the child class. That object has both Car’s methods and inherited Vehicle methods.
+
+ 🔹 myCar.start();
+  👉 Calls the inherited method from Vehicle.
+
+ 🔹myCar.playMusic();
+ 👉 Calls the child's own method.
+
+5) Small variations you should know:
+ 👉Inherited but not visible: private members of parent exist but are not directly accessible in child. Use protected or public for child access.
+ 👉Constructors: parent constructor runs first. You can call it explicitly with super() inside child's constructor.
+ 👉Method overriding: child can provide its own version of a parent method (same signature) — that's allowed but not required.
+
+
+ Quick constructor example:
+    class Vehicle {
+        Vehicle() { System.out.println("Vehicle made"); }
+    }
+    class Car extends Vehicle {
+        Car() {
+            super(); // calls Vehicle constructor (optional: Java does it implicitly if omitted)
+            System.out.println("Car made");
+        }
+    }
+ 👉Output:
+     Vehicle made
+     Car made
+
+6) When to use single inheritance
+👉 When a class is a more specific form of another class (IS-A relationship).
+👉 To reuse behavior and keep code clean.
+
+Q) Tiny practice (try this)
+👉 Modify Car to override start() so it prints "Car engine starts" and run.
+👉 Expected: overridden start will run for myCar.start().
+👉 Add a protected int speed; in Vehicle and set/read it from Car.

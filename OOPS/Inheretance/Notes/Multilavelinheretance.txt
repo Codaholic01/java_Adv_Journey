@@ -1,0 +1,64 @@
+🔹 What is Multilevel Inheritance?
+   Multilevel inheritance means a class inherits from a derived class (child of another class).
+   In simple words: Grandparent → Parent → Child.
+   The bottom-most class automatically inherits all features from grandparent + parent.
+👉 Example: Shape → Triangle → EquilateralTriangle
+
+🔹 Example 1:
+  class Shape {
+      public void area() {
+          System.out.println("Displays Area of Shape");
+      }
+  }
+
+  // Parent class
+  class Triangle extends Shape {
+      public void area(int h, int b) {
+          System.out.println("Area of Triangle: " + (0.5 * b * h));
+      }
+  }
+
+  // Child of Triangle
+  class EquilateralTriangle extends Triangle {
+      int side;
+
+      EquilateralTriangle(int s) {
+          side = s;
+      }
+
+      public void area() {
+          System.out.println("Area of Equilateral Triangle: " + (Math.sqrt(3) / 4) * side * side);
+      }
+  }
+
+  public class Main {
+      public static void main(String[] args) {
+          EquilateralTriangle et = new EquilateralTriangle(6);
+          et.area();        // EquilateralTriangle area
+          et.area(10, 5);   // Inherited from Triangle
+      }
+  }
+
+✅ Output:
+   Area of Equilateral Triangle: 15.588457268119896
+   Area of Triangle: 25.0
+
+
+Here:
+  Shape is the grandparent.
+  Triangle is the parent.
+  EquilateralTriangle is the child.
+
+🔹 Diagram (Visual Idea):
+       Shape (Grandparent)
+            ↓
+       Triangle (Parent)
+            ↓
+    EquilateralTriangle (Child)
+
+
+✅ Key Points to Remember:
+1. Inheritance chain: Grandparent → Parent → Child.
+2. Child class can access all parent and grandparent features.
+3. Can be combined with method overriding + polymorphism for real-world use.
+4. Useful when things become more specialized step by step.

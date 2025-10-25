@@ -1,0 +1,104 @@
+🔹 What is Hierarchical Inheritance?
+ When multiple child classes inherit from a single parent class, it is called Hierarchical Inheritance.
+ The parent class has common features (methods/variables) that all child classes can use.
+ Each child class can also have its own unique methods.
+
+👉 In short: One parent → many children.
+
+🔹 Example 1:
+       // Parent class
+       class Animal {
+           void eat() {
+               System.out.println("Animals can eat");
+           }
+       }
+
+       // Child 1
+       class Dog extends Animal {
+           void bark() {
+               System.out.println("Dog barks");
+           }
+       }
+
+       // Child 2
+       class Cat extends Animal {
+           void meow() {
+               System.out.println("Cat meows");
+           }
+       }
+
+       public class Main {
+           public static void main(String[] args) {
+               Dog d = new Dog();
+               d.eat();   // Inherited from Animal
+               d.bark();  // Dog specific
+
+               Cat c = new Cat();
+               c.eat();   // Inherited from Animal
+               c.meow();  // Cat specific
+           }
+       }
+
+✅ Output:
+   Animals can eat
+   Dog barks
+   Animals can eat
+   Cat meows
+
+
+🔹 Example 2:
+  Your code has a small bug in the triangle formula ((1/2)*b*h becomes 0 because (1/2) is integer division).
+
+    class Shape {
+        public void area() {
+            System.out.println("Displays Area of Shape");
+        }
+    }
+
+    class Triangle extends Shape {
+        public void area(int h, int b) {
+            System.out.println("Area of Triangle: " + (0.5 * b * h));
+        }
+    }
+
+    class Circle extends Shape {
+        public void area(int r) {
+            System.out.println("Area of Circle: " + (3.14 * r * r));
+        }
+    }
+
+    class Square extends Shape {
+        public void area(int side) {
+            System.out.println("Area of Square: " + (side * side));
+        }
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            Triangle t = new Triangle();
+            t.area(10, 5);
+
+            Circle c = new Circle();
+            c.area(7);
+
+            Square s = new Square();
+            s.area(4);
+        }
+    }
+
+✅ Output:
+  Area of Triangle: 25.0
+  Area of Circle: 153.86
+  Area of Square: 16
+
+
+🔹 Diagram (Visual Idea)
+              Shape (Parent)
+              /   |    \
+        Circle  Square  Triangle
+
+✅ Key Points to Remember:
+1. One parent → many children.
+2. Each child inherits parent features + adds its own features.
+3. Useful when we have common properties in parent and different behaviors in children.
+4. Often combined with method overriding + polymorphism in real-world programs.

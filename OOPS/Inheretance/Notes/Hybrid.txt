@@ -1,0 +1,78 @@
+🔹 What is Hybrid Inheritance?
+   Hybrid inheritance = Combination of more than one type of inheritance (single + multiple + hierarchical + multilevel).
+
+👉In real life:
+  You may have a class structure where some parts are hierarchical (one parent, many children)
+   and other parts are multilevel (grandparent → parent → child).
+
+⚠️ In Java, multiple inheritance with classes is not supported (to avoid ambiguity called the diamond problem).
+👉 But we can achieve hybrid inheritance using interfaces.
+
+🔹 Diagram (Visual Idea):
+            A (Grandparent Class)
+           / \
+          B   C    (Hierarchical)
+           \ /
+            D     (Multiple via Interfaces)
+
+👉 Here:
+  B and C both inherit from A (Hierarchical).
+  D inherits from B and C (Multiple / Hybrid).
+
+🔹 Example 1:
+   // Base class
+   class Person {
+       void display() {
+           System.out.println("I am a Person");
+       }
+   }
+
+   // First child (hierarchical)
+   class Student extends Person {
+       void study() {
+           System.out.println("Student studies");
+       }
+   }
+
+   // Second child (hierarchical)
+   class Teacher extends Person {
+       void teach() {
+           System.out.println("Teacher teaches");
+       }
+   }
+
+   // Interface for multiple inheritance
+   interface Sports {
+       void play();
+   }
+
+   // Hybrid inheritance: StudentAthlete inherits from Student + Sports
+   class StudentAthlete extends Student implements Sports {
+       public void play() {
+           System.out.println("Student Athlete plays football");
+       }
+   }
+
+   public class Main {
+       public static void main(String[] args) {
+           StudentAthlete sa = new StudentAthlete();
+           sa.display();  // from Person
+           sa.study();    // from Student
+           sa.play();     // from Sports
+       }
+   }
+
+✅ Output:
+   I am a Person
+   Student studies
+   Student Athlete plays football
+
+✅Here we used:
+  Single/Hierarchical (Student → Person).
+  Multiple via Interface (StudentAthlete → Student + Sports).
+
+🔹 ✅ Key Points about Hybrid Inheritance in Java:
+1. Java does not allow multiple inheritance with classes (avoids diamond problem).
+2. We use interfaces to achieve multiple inheritance inside hybrid structures.
+3. Hybrid = Combination (Single + Multilevel + Hierarchical + Interface-based multiple).
+4. Very common in real-world design (e.g., Android classes, Spring Boot design, banking systems).
